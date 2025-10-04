@@ -1,0 +1,168 @@
+name: Autograding Tests
+
+on:
+  - push
+  - workflow_dispatch
+
+permissions:
+  checks: write
+  actions: read
+  contents: read
+
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pytest
+    
+    # Exercise 1 Tests
+    - name: Exercise 1 - Profile Variables
+      id: exercise-1
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Exercise 1 - Profile Variables
+        setup-command: ''
+        command: python -m pytest test_lab1.py::TestLab1::test_exercise1_structure test_lab1.py::TestLab1::test_exercise1_types test_lab1.py::TestLab1::test_exercise1_not_default -v
+        timeout: 1
+        max-score: 5
+    
+    # Exercise 2 Tests
+    - name: Exercise 2 - String Operations
+      id: exercise-2
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Exercise 2 - String Operations
+        setup-command: ''
+        command: python -m pytest test_lab1.py::TestLab1::test_exercise2_basic test_lab1.py::TestLab1::test_exercise2_different_names test_lab1.py::TestLab1::test_exercise2_single_char -v
+        timeout: 1
+        max-score: 5
+    
+    # Exercise 3 Tests
+    - name: Exercise 3 - Average Calculation
+      id: exercise-3
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Exercise 3 - Average Calculation
+        setup-command: ''
+        command: python -m pytest test_lab1.py::TestLab1::test_exercise3_basic test_lab1.py::TestLab1::test_exercise3_all_same test_lab1.py::TestLab1::test_exercise3_different_values -v
+        timeout: 1
+        max-score: 5
+    
+    # Exercise 4 Tests
+    - name: Exercise 4 - Temperature Converter
+      id: exercise-4
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Exercise 4 - Temperature Converter
+        setup-command: ''
+        command: python -m pytest test_lab1.py::TestLab1::test_exercise4_basic test_lab1.py::TestLab1::test_exercise4_freezing test_lab1.py::TestLab1::test_exercise4_boiling test_lab1.py::TestLab1::test_exercise4_negative -v
+        timeout: 1
+        max-score: 7
+    
+    # Exercise 5 Tests
+    - name: Exercise 5 - Rectangle Calculations
+      id: exercise-5
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Exercise 5 - Rectangle Calculations
+        setup-command: ''
+        command: python -m pytest test_lab1.py::TestLab1::test_exercise5_basic test_lab1.py::TestLab1::test_exercise5_square test_lab1.py::TestLab1::test_exercise5_decimals -v
+        timeout: 1
+        max-score: 7
+    
+    # Exercise 6 Tests
+    - name: Exercise 6 - Shopping Cart
+      id: exercise-6
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Exercise 6 - Shopping Cart
+        setup-command: ''
+        command: python -m pytest test_lab1.py::TestLab1::test_exercise6_basic test_lab1.py::TestLab1::test_exercise6_no_tax test_lab1.py::TestLab1::test_exercise6_high_tax -v
+        timeout: 1
+        max-score: 8
+    
+    # Exercise 7 Tests
+    - name: Exercise 7 - Age Checker
+      id: exercise-7
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Exercise 7 - Age Checker
+        setup-command: ''
+        command: python -m pytest test_lab1.py::TestLab1::test_exercise7_cannot_vote test_lab1.py::TestLab1::test_exercise7_can_vote -v
+        timeout: 1
+        max-score: 8
+    
+    # Exercise 8 Tests
+    - name: Exercise 8 - Grade Calculator
+      id: exercise-8
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Exercise 8 - Grade Calculator
+        setup-command: ''
+        command: python -m pytest test_lab1.py::TestLab1::test_exercise8_grade_a test_lab1.py::TestLab1::test_exercise8_grade_b test_lab1.py::TestLab1::test_exercise8_grade_c test_lab1.py::TestLab1::test_exercise8_grade_d test_lab1.py::TestLab1::test_exercise8_grade_f -v
+        timeout: 1
+        max-score: 10
+    
+    # Exercise 9 Tests
+    - name: Exercise 9 - Discount Calculator
+      id: exercise-9
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Exercise 9 - Discount Calculator
+        setup-command: ''
+        command: python -m pytest test_lab1.py::TestLab1::test_exercise9_twenty_percent test_lab1.py::TestLab1::test_exercise9_ten_percent test_lab1.py::TestLab1::test_exercise9_no_discount test_lab1.py::TestLab1::test_exercise9_boundary_100 test_lab1.py::TestLab1::test_exercise9_boundary_50 -v
+        timeout: 1
+        max-score: 10
+    
+    # Exercise 10 Tests
+    - name: Exercise 10 - Debug Circle Area
+      id: exercise-10
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Exercise 10 - Debug Circle Area
+        setup-command: ''
+        command: python -m pytest test_lab1.py::TestLab1::test_exercise10_basic test_lab1.py::TestLab1::test_exercise10_different_radii -v
+        timeout: 1
+        max-score: 8
+    
+    # Exercise 11 Tests
+    - name: Exercise 11 - Fix Logic Error
+      id: exercise-11
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Exercise 11 - Fix Logic Error
+        setup-command: ''
+        command: python -m pytest test_lab1.py::TestLab1::test_exercise11_positive test_lab1.py::TestLab1::test_exercise11_negative test_lab1.py::TestLab1::test_exercise11_zero -v
+        timeout: 1
+        max-score: 7
+    
+    # Autograding Reporter
+    - name: Autograding Reporter
+      uses: classroom-resources/autograding-grading-reporter@v1
+      env:
+        EXERCISE-1_RESULTS: "${{steps.exercise-1.outputs.result}}"
+        EXERCISE-2_RESULTS: "${{steps.exercise-2.outputs.result}}"
+        EXERCISE-3_RESULTS: "${{steps.exercise-3.outputs.result}}"
+        EXERCISE-4_RESULTS: "${{steps.exercise-4.outputs.result}}"
+        EXERCISE-5_RESULTS: "${{steps.exercise-5.outputs.result}}"
+        EXERCISE-6_RESULTS: "${{steps.exercise-6.outputs.result}}"
+        EXERCISE-7_RESULTS: "${{steps.exercise-7.outputs.result}}"
+        EXERCISE-8_RESULTS: "${{steps.exercise-8.outputs.result}}"
+        EXERCISE-9_RESULTS: "${{steps.exercise-9.outputs.result}}"
+        EXERCISE-10_RESULTS: "${{steps.exercise-10.outputs.result}}"
+        EXERCISE-11_RESULTS: "${{steps.exercise-11.outputs.result}}"
+      with:
+        runners: exercise-1,exercise-2,exercise-3,exercise-4,exercise-5,exercise-6,exercise-7,exercise-8,exercise-9,exercise-10,exercise-11
