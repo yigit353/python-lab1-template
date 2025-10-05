@@ -256,7 +256,7 @@ def exercise10(radius):
     # BUGGY CODE - FIX THE ERRORS:
     pi = 3.14159
     # TODO: Fix the errors in the calculation below
-    area = 0  # This line has errors - fix it!
+    area = Pi * Radius * Radius
     
     return area
 
